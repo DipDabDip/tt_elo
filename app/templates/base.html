@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - TT_Elo</title>
+      {% else %}
+      <title>TT_Elo</title>
+      {% endif %}
+    </head>
+    <body>
+	<div>
+	TT_Elo:
+	<a href="{{url_for('index')}}">Home</a>
+	{%if current_user.is_anonymous %}
+	<a href="{{url_for('login')}}">Login</a>
+	{% else %}
+        <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
+	<a href="{{ url_for('logout')}}">Logout</a>
+	<a href="{{ url_for('update_scores')}}">Update Scores</a>
+	{% endif %}
+	</div>
+	<hr>
+	{% with messages = get_flashed_messages() %}
+        {% if messages %}
+	<ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+	{% endwith %}
+	<hr>
+        {% block content %}{% endblock %}
+	<footer><iframe id='kofiframe' src='https://ko-fi.com/namesbond/?hidefeed=true&widget=true&embed=true&preview=true' style='border:none;width:100%;padding:4px;background:#f9f9f9;' height='712' title='namesbond'></iframe></footer>
+    </body>
+</html>
