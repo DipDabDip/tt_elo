@@ -7,9 +7,13 @@
 	{% else %}
 	<h1>Hi, you aren't logged in yet!</h1>
 	{% endif %}
-	
-	<div align="right">
+	<tr><td>
+		{% for player in players %}
+		<div><li><p>{{ player.username }}</p></li></div>
+		{% endfor %}
+	</td>
+	<td align="right">
 		<a class="twitter-timeline" data-width="300" data-height="800" href="https://twitter.com/NamesBond4/lists/1465103899497533445?ref_src=twsrc%5Etfw">A Twitter List by NamesBond4</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 	
-	</div>
+	</td></tr>	
 
 {% endblock %}

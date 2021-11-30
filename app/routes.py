@@ -9,7 +9,11 @@ from datetime import datetime
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', title='Home')
+    players = User.query.all()
+    for x in players:
+        print(x.elo)
+    players.sort(key=lambda x: x.elo, reverse=True)
+    return render_template('index.html', title='Home', players = players)
 
 
 @app.route('/login', methods=['GET', 'POST'])
