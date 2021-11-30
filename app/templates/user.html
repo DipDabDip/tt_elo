@@ -10,7 +10,7 @@
 	    {% if user == current_user %}
                 <p><a href="{{ url_for('edit_profile') }}">Edit your profile</a></p>
                 {% endif %}
-		{% if user.elo %}<p>Elo: {{ user.elo }} </p>{% endif %}
+		{% if user.elo %}<p>Elo: {{ user.getelo() }} </p>{% endif %}
 		{% if user.wins %}<p>Wins: {{ user.wins }} </p>{% endif %}
 		{% if user.losses %}<p>Losses: {{ user.losses }} </p>{% endif %}
 		{% if user.getwins() %}<p>Games played: {{user.getwins()}} </p>{%endif%}

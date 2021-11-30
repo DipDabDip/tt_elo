@@ -36,13 +36,16 @@ class User(UserMixin, db.Model):
 
     def getwins(self):
         return self.wins + self.losses
-    
+   
+    def getelo(self):
+        return int(round(self.elo, 0))
+
     def ptobeat(self, other):
         return 1.0 * 1.0 / (1+1.0*math.pow(10, 1.0 * (self.elo - other.elo) / 400 ))
 
     def beat(self, other):
-        p2 = other.ptobeat(self)
-        p1 = 1-p2
+        p1 = other.ptobeat(self)
+        p2 = 1-p1
         self.elo += 30 * (1-p1)
         other.elo += 30 * (0-p2)
         self.wins +=1
