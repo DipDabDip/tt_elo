@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, UpdateScoreForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Game
 from werkzeug.urls import url_parse
 from datetime import datetime
 
@@ -80,9 +80,11 @@ def edit_profile():
 def update_scores():
     form = UpdateScoreForm()
     if form.validate_on_submit():
-        winner = User.query.filter_by(username=form.winner.data).first()
-        loser = User.query.filter_by(username=form.loser.data).first()
-        winner.beat(loser)
+        playerwin = User.query.filter_by(username=form.winner.data).first()
+        playerlose = User.query.filter_by(username=form.loser.data).first()
+        playerwin.beat(playerlose)
+        game = Game(winner = playerwin.id, loser = playerlose.id, reporter = current_user.id)
+        db.session.add(game)
         db.session.commit()
         flash('Player scores updated!')
         return redirect(url_for('update_scores'))

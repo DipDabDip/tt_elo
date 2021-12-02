@@ -5,12 +5,18 @@ from hashlib import md5
 from datetime import datetime
 import math
 
+class Game(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    winner = db.Column(db.Integer, db.ForeignKey('user.id'))
+    loser = db.Column(db.Integer, db.ForeignKey('user.id'))
+    reporter = db.Column(db.Integer, db.ForeignKey('user.id'))
+    timestamp = db.Column(db.DateTime, Index=True, default=datetime.utcnow)
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-
     #user profile stuff
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default = datetime.utcnow())
