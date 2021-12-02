@@ -13,7 +13,8 @@ def index():
     for x in players:
         print(x.elo)
     players.sort(key=lambda x: x.elo, reverse=True)
-    return render_template('index.html', title='Home', players = players)
+    games = Game.query.all()
+    return render_template('index.html', title='Home', players=players, games=games)
 
 
 @app.route('/login', methods=['GET', 'POST'])

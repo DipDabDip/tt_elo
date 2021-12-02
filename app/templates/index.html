@@ -9,9 +9,13 @@
 	{% endif %}
 	<tr><td>
 		{% for player in players %}
-		<div><li><p>{{ player.username }}</p></li></div>
+		<div><li>{{ player.username }} {{ player.getelo() }}</li></div>
 		{% endfor %}
-	</td>
+	</td></tr>
+	<tr><td>
+		{% for game in games %}
+		<div><li>Winner: {{ game.winner }} Loser: {{ game.loser }} Reporter: {{game.reporter }} Time: {{ game.Timestampt }}</li></div>
+	</td></tr>
 	<td align="right">
 		<a class="twitter-timeline" data-width="300" data-height="800" href="https://twitter.com/NamesBond4/lists/1465103899497533445?ref_src=twsrc%5Etfw">A Twitter List by NamesBond4</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 	
 	</td></tr>	

@@ -10,7 +10,7 @@ class Game(db.Model):
     winner = db.Column(db.Integer, db.ForeignKey('user.id'))
     loser = db.Column(db.Integer, db.ForeignKey('user.id'))
     reporter = db.Column(db.Integer, db.ForeignKey('user.id'))
-    timestamp = db.Column(db.DateTime, Index=True, default=datetime.utcnow)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
