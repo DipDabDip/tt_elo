@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block app_content %}
 
 	{% if current_user.username %}
 	<h1>Hi, {{ current_user.username }}!</h1>
@@ -18,7 +18,7 @@
 		{% endfor %}
 	</td></tr>
 	<td align="right">
-		<a class="twitter-timeline" data-width="300" data-height="800" href="https://twitter.com/NamesBond4/lists/1465103899497533445?ref_src=twsrc%5Etfw">A Twitter List by NamesBond4</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 	
-	</td></tr>	
+		<a class="twitter-timeline" data-width="300" data-height="800" href="https://twitter.com/NamesBond4/lists/1465103899497533445?ref_src=twsrc%5Etfw">A Twitter List by NamesBond4</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+	</td></tr>
 
 {% endblock %}

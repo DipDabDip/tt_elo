@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block app_content %}
 	<h1>Update Scores</h1>
 	<form action="" method="post">
 		{{ form.hidden_tag() }}
@@ -16,9 +16,8 @@
 			{{ form.loser(size=32) }}<br>
 			{% for error in form.loser.errors %}
 			<span style="color: red;">[{{ error }}]</span>
-			{% endfor %} 
+			{% endfor %}
 		</p>
 		<p>{{ form.submit() }}</p>
 	</form>
 {% endblock %}
-			
