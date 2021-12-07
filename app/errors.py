@@ -9,4 +9,3 @@ def not_found_error(error):
 def not_found_error(error):
     db.session.rollback()
     return render_template('500.html'), 500
-

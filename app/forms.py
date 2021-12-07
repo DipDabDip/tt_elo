@@ -59,4 +59,3 @@ class UpdateScoreForm(FlaskForm):
         user = User.query.filter_by(username=loser.data)
         if user is None:
             raise ValidationError('Loser name not found in database.')
-
