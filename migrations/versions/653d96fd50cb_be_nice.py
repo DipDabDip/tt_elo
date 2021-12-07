@@ -1,4 +1,4 @@
-"""basically merged some shit
+"""be nice
 
 Revision ID: 653d96fd50cb
 Revises: d03f1feef4ca
