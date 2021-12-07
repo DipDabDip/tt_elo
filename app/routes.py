@@ -10,8 +10,6 @@ from datetime import datetime
 @app.route('/index')
 def index():
     players = User.query.all()
-    for x in players:
-        print(x.elo)
     players.sort(key=lambda x: x.elo, reverse=True)
     games = Game.query.all()
     return render_template('index.html', title='Home', players=players, games=games)
