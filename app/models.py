@@ -12,6 +12,20 @@ class Game(db.Model):
     reporter = db.Column(db.Integer, db.ForeignKey('user.id'))
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
+class SunUser(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    player_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    elo = db.Column(db.Float)
+    wins = db.Column(db.Integer)
+    losses = db.Column(db.Integer)
+
+class WedUser(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    player_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    elo = db.Column(db.Float)
+    wins = db.Column(db.Integer)
+    losses = db.Column(db.Integer)
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
@@ -24,7 +38,7 @@ class User(UserMixin, db.Model):
     #actual player stuff
     wins = db.Column(db.Integer, default = 0)
     losses = db.Column(db.Integer, default = 0)
-    elo= db.Column(db.Float, default = 1000)
+    elo = db.Column(db.Float, default = 1000)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
