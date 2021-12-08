@@ -6,12 +6,22 @@ from app.models import User, Game
 from werkzeug.urls import url_parse
 from datetime import datetime
 
+class game_with_player:
+    def __init__(self, game):
+        self.winner = User.query.get(game.winner).username
+        self.loser = User.query.get(game.loser).username
+        self.reporter = User.query.get(game.reporter).username
+        self.id = game.id
+        self.timestamp = game.timestamp
+
 @app.route('/')
 @app.route('/index')
 def index():
     players = User.query.all()
     players.sort(key=lambda x: x.elo, reverse=True)
     games = Game.query.all()
+    games = [game_with_player(x) for x in games]
+    games.reverse()
     return render_template('index.html', title='Home', players=players, games=games)
 
 
