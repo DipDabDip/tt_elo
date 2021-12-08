@@ -7,18 +7,38 @@
 	{% else %}
 	<h1>Hi, you aren't logged in yet!</h1>
 	{% endif %}
-	<tr><td>
-		{% for player in players %}
-		<div><li>{{ player.username }} {{ player.getelo() }}</li></div>
-		{% endfor %}
-	</td></tr>
-	<tr><td>
-		{% for game in games %}
-		<div><li>Game_ID: {{ game.id }} Winner: {{ game.winner }} Loser: {{ game.loser }} Reporter: {{game.reporter }} Time: {{ game.timestamp }}</li></div>
-		{% endfor %}
-	</td></tr>
-	<td align="right">
-		<a class="twitter-timeline" data-width="300" data-height="800" href="https://twitter.com/NamesBond4/lists/1465103899497533445?ref_src=twsrc%5Etfw">A Twitter List by NamesBond4</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-	</td></tr>
+	<table style="float:left;border-collapse: collapse;border: 1px solid black;width:30%;margin-right: 50px;">
+			<tr style="border:1px solid black; border-collapse: collapse;">
+				<th style="border:1px solid black; border-collapse: collapse;">Username </th>
+				<th style="border:1px solid black; border-collapse: collapse;">Elo </th>
+			</tr>
+			{% for player in players %}
+				<tr style="border:1px solid black; border-collapse: collapse;">
+					<td style="border:1px solid black; border-collapse: collapse;">{{ player.username }}</td>
+					<td style="border:1px solid black; border-collapse: collapse;">{{ player.getelo() }}</td>
+				</tr>
+			{% endfor %}
+	</table>
 
+	<table style="float:left;border-collapse: collapse;border: 1px solid black;width:30%;">
+		<tr style="border:1px solid black; border-collapse: collapse;">
+			<th style="border:1px solid black; border-collapse: collapse;">Game ID </th>
+			<th style="border:1px solid black; border-collapse: collapse;">Game winner </th>
+			<th style="border:1px solid black; border-collapse: collapse;">Game loser </th>
+			<th style="border:1px solid black; border-collapse: collapse;">Game Reporter </th>
+			<th style="border:1px solid black; border-collapse: collapse;">Game timestamp </th>
+		</tr>
+		{% for game in games %}
+			<tr style="border:1px solid black; border-collapse: collapse;">
+				<td style="border:1px solid black; border-collapse: collapse;">{{ game.id }}</td>
+				<td style="border:1px solid black; border-collapse: collapse;">{{ game.winner }}</td>
+				<td style="border:1px solid black; border-collapse: collapse;">{{ game.loser }}</td>
+				<td style="border:1px solid black; border-collapse: collapse;">{{ game.reporter }}</td>
+				<td style="border:1px solid black; border-collapse: collapse;">{{ game.timestamp }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+	<div style="float:right">
+	<a class="twitter-timeline" data-width="300" data-height="800" href="https://twitter.com/NamesBond4/lists/1465103899497533445?ref_src=twsrc%5Etfw">A Twitter List by NamesBond4</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+	</div>
 {% endblock %}
