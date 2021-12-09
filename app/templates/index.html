@@ -11,11 +11,16 @@
 			<tr style="border:1px solid black; border-collapse: collapse;">
 				<th style="border:1px solid black; border-collapse: collapse;">Username </th>
 				<th style="border:1px solid black; border-collapse: collapse;">Elo </th>
+				<th style="border:1px solid black; border-collapse: collapse;">Wins </th>
+				<th style="border:1px solid black; border-collapse: collapse;">Losses </th>			
 			</tr>
 			{% for player in players %}
 				<tr style="border:1px solid black; border-collapse: collapse;">
 					<td style="border:1px solid black; border-collapse: collapse;">{{ player.username }}</td>
 					<td style="border:1px solid black; border-collapse: collapse;">{{ player.getelo() }}</td>
+					<td style="border:1px solid black; border-collapse: collapse;">{{ player.wins }}</td>
+					<td style="border:1px solid black; border-collapse: collapse;">{{ player.losses }}</td>
+				
 				</tr>
 			{% endfor %}
 	</table>
