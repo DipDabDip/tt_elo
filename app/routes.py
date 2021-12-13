@@ -105,3 +105,8 @@ def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
+
+@app.after_request
+def gnu_terry_pratchett(resp):
+    resp.headers.add("X-Clacks-Overhead", "GNU Terry Pratchett")
+    return resp
