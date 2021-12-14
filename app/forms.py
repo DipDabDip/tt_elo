@@ -4,6 +4,7 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Le
 from app.models import User
 from flask_login import current_user
 
+#every class in app.forms is used to create web forms on different pages
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
