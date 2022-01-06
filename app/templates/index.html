@@ -37,8 +37,8 @@
 			<tr style="border:1px solid black; border-collapse: collapse;">
 				<td style="border:1px solid black; border-collapse: collapse;">{{ game.id }}</td>
 				<td style="border:1px solid black; border-collapse: collapse;">{{ game.fmt_name() }}</td>
-				<td style="border:1px solid black; border-collapse: collapse;">{{ game.loser }}</td>
-				<td style="border:1px solid black; border-collapse: collapse;">{{ game.reporter }}</td>
+				<td style="border:1px solid black; border-collapse: collapse;">{{ game.fmt_loser() }}</td>
+				<td style="border:1px solid black; border-collapse: collapse;">{{ game.fmt_rep() }}</td>
 				<td style="border:1px solid black; border-collapse: collapse;">{{ game.timestamp }}</td>
 			</tr>
 		{% endfor %}

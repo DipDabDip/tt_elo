@@ -18,6 +18,12 @@ class game_with_player:
     def fmt_name(self):
         MAX = 10
         return self.winner[:MAX] + ("..."*(len(self.winner) > MAX))
+    def fmt_lose(self):
+        MAX = 10
+        return self.winner[:MAX] + ("..."*(len(self.loser) > MAX))
+    def fmt_rep(self):
+        MAX = 10
+        return self.winner[:MAX] + ("..."*(len(self.reporter) > MAX))        
 
 
 #function to generate home page
