@@ -14,9 +14,13 @@ class game_with_player:
         self.reporter = User.query.get(game.reporter).username
         self.id = game.id
         self.timestamp = game.timestamp
+    #formats name nicely for output
+    def fmt_name(self):
+        MAX = 10
+        return self.winner[:MAX] + ("..."*(len(self.username) > MAX))
 
 
-#function to generate index
+#function to generate home page
 @app.route('/')
 @app.route('/index')
 def index():

@@ -16,7 +16,7 @@
 			</tr>
 			{% for player in players %}
 				<tr style="border:1px solid black; border-collapse: collapse;">
-					<td style="border:1px solid black; border-collapse: collapse;">{{ player.username }}</td>
+					<td style="border:1px solid black; border-collapse: collapse;">{{ player.fmt_name() }}</td>
 					<td style="border:1px solid black; border-collapse: collapse;">{{ player.getelo() }}</td>
 					<td style="border:1px solid black; border-collapse: collapse;">{{ player.wins }}</td>
 					<td style="border:1px solid black; border-collapse: collapse;">{{ player.losses }}</td>
@@ -36,7 +36,7 @@
 		{% for game in games %}
 			<tr style="border:1px solid black; border-collapse: collapse;">
 				<td style="border:1px solid black; border-collapse: collapse;">{{ game.id }}</td>
-				<td style="border:1px solid black; border-collapse: collapse;">{{ game.winner }}</td>
+				<td style="border:1px solid black; border-collapse: collapse;">{{ game.fmt_name() }}</td>
 				<td style="border:1px solid black; border-collapse: collapse;">{{ game.loser }}</td>
 				<td style="border:1px solid black; border-collapse: collapse;">{{ game.reporter }}</td>
 				<td style="border:1px solid black; border-collapse: collapse;">{{ game.timestamp }}</td>

@@ -53,6 +53,10 @@ class User(UserMixin, db.Model):
     losses = db.Column(db.Integer, default = 0)
     elo = db.Column(db.Float, default = 1000)
 
+    def fmt_name(self):
+        MAX = 10
+        return self.username[:MAX] + ("..."*(len(self.username) > MAX))
+
     #method to hash the password
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -82,7 +86,7 @@ class User(UserMixin, db.Model):
 
     #calculates the probability that one player will beat another
     def ptobeat(self, other):
-        return 1.0 * 1.0 / (1+1.0*math.pow(10, 1.0 * (self.elo - other.elo) / 400 ))
+        return 1.0 / (1+1.0*math.pow(10, 1.0 * (self.elo - other.elo) / 400 ))
 
     #adjusts elos, wins, losses, when one player beats another
     def beat(self, other):
@@ -92,6 +96,8 @@ class User(UserMixin, db.Model):
         other.elo += 30 * (0-p2)
         self.wins +=1
         other.losses +=1
+
+    
 
 @login.user_loader
 def load_user(id):
