@@ -20,10 +20,10 @@ class game_with_player:
         return self.winner[:MAX] + ("..."*(len(self.winner) > MAX))
     def fmt_lose(self):
         MAX = 10
-        return self.winner[:MAX] + ("..."*(len(self.loser) > MAX))
+        return self.loser[:MAX] + ("..."*(len(self.loser) > MAX))
     def fmt_rep(self):
         MAX = 10
-        return self.winner[:MAX] + ("..."*(len(self.reporter) > MAX))        
+        return self.reporter[:MAX] + ("..."*(len(self.reporter) > MAX))        
 
 
 #function to generate home page
