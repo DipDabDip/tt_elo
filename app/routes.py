@@ -17,7 +17,7 @@ class game_with_player:
     #formats name nicely for output
     def fmt_name(self):
         MAX = 10
-        return self.winner[:MAX] + ("..."*(len(self.username) > MAX))
+        return self.winner[:MAX] + ("..."*(len(self.winner) > MAX))
 
 
 #function to generate home page
