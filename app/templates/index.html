@@ -15,6 +15,7 @@
 				<th style="border:1px solid black; border-collapse: collapse;">Losses </th>			
 			</tr>
 			{% for player in players %}
+			{% if player.getwins() %}
 				<tr style="border:1px solid black; border-collapse: collapse;">
 					<td style="border:1px solid black; border-collapse: collapse;">{{ player.fmt_name() }}</td>
 					<td style="border:1px solid black; border-collapse: collapse;">{{ player.getelo() }}</td>
@@ -22,6 +23,7 @@
 					<td style="border:1px solid black; border-collapse: collapse;">{{ player.losses }}</td>
 				
 				</tr>
+			{% endif %}
 			{% endfor %}
 	</table>
 
