@@ -9,18 +9,18 @@
 	{% endif %}
 	<table style="float:left;border-collapse: collapse;border: 1px solid black;width:30%;margin-right: 50px; overflow-y: auto; height: 700px; display: block; width: fit-content;">
 			<tr style="border:1px solid black; border-collapse: collapse;">
-				<th style="border:1px solid black; border-collapse: collapse;">Username </th>
-				<th style="border:1px solid black; border-collapse: collapse;">Elo </th>
-				<th style="border:1px solid black; border-collapse: collapse;">Wins </th>
-				<th style="border:1px solid black; border-collapse: collapse;">Losses </th>			
+				<th style="border:1px solid black; border-collapse: collapse;"> Username </th>
+				<th style="border:1px solid black; border-collapse: collapse;"> Elo </th>
+				<th style="border:1px solid black; border-collapse: collapse;"> Wins </th>
+				<th style="border:1px solid black; border-collapse: collapse;"> Losses </th>			
 			</tr>
 			{% for player in players %}
 			{% if player.getwins() %}
 				<tr style="border:1px solid black; border-collapse: collapse;">
-					<td style="border:1px solid black; border-collapse: collapse;">{{ player.fmt_name() }}</td>
-					<td style="border:1px solid black; border-collapse: collapse;">{{ player.getelo() }}</td>
-					<td style="border:1px solid black; border-collapse: collapse;">{{ player.wins }}</td>
-					<td style="border:1px solid black; border-collapse: collapse;">{{ player.losses }}</td>
+					<td style="border:1px solid black; border-collapse: collapse;"> {{ player.fmt_name() }}</td>
+					<td style="border:1px solid black; border-collapse: collapse;"> {{ player.getelo() }}</td>
+					<td style="border:1px solid black; border-collapse: collapse;"> {{ player.wins }}</td>
+					<td style="border:1px solid black; border-collapse: collapse;"> {{ player.losses }}</td>
 				
 				</tr>
 			{% endif %}
@@ -29,19 +29,19 @@
 
 	<table style="float:left;border-collapse: collapse;border: 1px solid black;width:fit-content; overflow-y: scroll; height: 700px; display: block; ">
 		<tr style="border:1px solid black; border-collapse: collapse;">
-			<th style="border:1px solid black; border-collapse: collapse;">Game ID </th>
-			<th style="border:1px solid black; border-collapse: collapse;">Game winner </th>
-			<th style="border:1px solid black; border-collapse: collapse;">Game loser </th>
-			<th style="border:1px solid black; border-collapse: collapse;">Game Reporter </th>
-			<th style="border:1px solid black; border-collapse: collapse;">Game timestamp </th>
+			<th style="border:1px solid black; border-collapse: collapse;"> Game ID </th>
+			<th style="border:1px solid black; border-collapse: collapse;"> Game winner </th>
+			<th style="border:1px solid black; border-collapse: collapse;"> Game loser </th>
+			<th style="border:1px solid black; border-collapse: collapse;"> Game Reporter </th>
+			<th style="border:1px solid black; border-collapse: collapse;"> Game timestamp </th>
 		</tr>
 		{% for game in games %}
 			<tr style="border:1px solid black; border-collapse: collapse;">
-				<td style="border:1px solid black; border-collapse: collapse;">{{ game.id }}</td>
-				<td style="border:1px solid black; border-collapse: collapse;">{{ game.fmt_name() }}</td>
-				<td style="border:1px solid black; border-collapse: collapse;">{{ game.fmt_lose() }}</td>
-				<td style="border:1px solid black; border-collapse: collapse;">{{ game.fmt_rep() }}</td>
-				<td style="border:1px solid black; border-collapse: collapse;">{{ game.timestamp }}</td>
+				<td style="border:1px solid black; border-collapse: collapse;"> {{ game.id }}</td>
+				<td style="border:1px solid black; border-collapse: collapse;"> {{ game.fmt_name() }}</td>
+				<td style="border:1px solid black; border-collapse: collapse;"> {{ game.fmt_lose() }}</td>
+				<td style="border:1px solid black; border-collapse: collapse;"> {{ game.fmt_rep() }}</td>
+				<td style="border:1px solid black; border-collapse: collapse;"> {{ game.timestamp }}</td>
 			</tr>
 		{% endfor %}
 	</table>
