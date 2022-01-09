@@ -7,6 +7,7 @@ from werkzeug.urls import url_parse
 from datetime import datetime
 
 #class to help the formatting of the game table on the home page
+#Note to self - i could totally package this into the game class as something like game.getwinner() querying the database so then i could have game.getwinner().fmtname()
 class game_with_player:
     def __init__(self, game):
         self.winner = User.query.get(game.winner).username

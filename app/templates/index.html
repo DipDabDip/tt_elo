@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-
 	{% if current_user.username %}
-	<h1>Hi, {{ current_user.username }}!</h1>
+	<h1><span class="white_bg">Hi, {{ current_user.username }}!</span></span></h1>
 	{% else %}
-	<h1>Hi, you aren't logged in yet!</h1>
+	<h1><span class="white_bg">Hi, you aren't logged in yet!</span></h1>
 	{% endif %}
-	<table style="float:left;border-collapse: collapse;border: 1px solid black;width:30%;margin-right: 50px; overflow-y: auto; height: 700px; display: block; width: fit-content;">
+	<table>
 			<tr style="border:1px solid black; border-collapse: collapse;">
 				<th style="border:1px solid black; border-collapse: collapse;"> Username </th>
 				<th style="border:1px solid black; border-collapse: collapse;"> Elo </th>
@@ -17,7 +16,7 @@
 			{% for player in players %}
 			{% if player.getwins() %}
 				<tr style="border:1px solid black; border-collapse: collapse;">
-					<td style="border:1px solid black; border-collapse: collapse;"> {{ player.fmt_name() }}</td>
+					<td style="border:1px solid black; border-collapse: collapse;"><a class="nav-link" href="{{ url_for('user', username=player.username) }}"> {{ player.fmt_name() }}</a> </td>
 					<td style="border:1px solid black; border-collapse: collapse;"> {{ player.getelo() }}</td>
 					<td style="border:1px solid black; border-collapse: collapse;"> {{ player.wins }}</td>
 					<td style="border:1px solid black; border-collapse: collapse;"> {{ player.losses }}</td>
@@ -27,7 +26,7 @@
 			{% endfor %}
 	</table>
 
-	<table style="float:left;border-collapse: collapse;border: 1px solid black;width:fit-content; overflow-y: scroll; height: 700px; display: block; ">
+	<table>
 		<tr style="border:1px solid black; border-collapse: collapse;">
 			<th style="border:1px solid black; border-collapse: collapse;"> Game ID </th>
 			<th style="border:1px solid black; border-collapse: collapse;"> Game winner </th>

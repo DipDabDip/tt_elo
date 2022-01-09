@@ -1,0 +1,48 @@
+/*Following is css for tables, which im only using to display leaderboards & such*/
+table {
+    float:left;
+    border-collapse: collapse;
+    border: 1px solid black;
+    width:30%;
+    margin-right: 50px;
+    overflow-y: auto;
+    height: 700px;
+    display: block;
+    width: fit-content;
+    background-color: #ffffff;
+}
+
+/*Setting a background for the header */
+.white_bg
+{
+    background-color: white;
+    border-radius: 4em;
+}
+
+/*Following is stuff to make links not highlight, to be used in the leaderboard.*/
+a.nav-link:link
+{
+   color: #000000;
+   text-decoration: none;
+}
+a.nav-link:visited
+{
+   color: #000000;
+   text-decoration: none;
+}
+a.nav-link:hover
+{
+   color: #000000;
+   text-decoration: none;
+}
+a.nav-link:active
+{
+   color: #000000;
+   text-decoration: none;
+}
+
+/* setting a funky fresh backround image */
+body {
+    background-image: url("pondertheorb.png");
+    background-color: #cccccc;
+   }

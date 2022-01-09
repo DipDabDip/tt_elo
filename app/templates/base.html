@@ -1,5 +1,6 @@
 {% extends 'bootstrap/base.html' %}
 
+
 {% block title %}
     {% if title %}{{ title }} - TTELO{% else %}Welcome to TTELO{% endif %}
 {% endblock %}
@@ -35,6 +36,10 @@
 {% endblock %}
 
 {% block content %}
+    <head>
+        <link rel="stylesheet" href={{ url_for('static', filename='style.css') }}>
+    </head>
+
     <div class="container">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
