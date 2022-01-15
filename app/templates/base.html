@@ -27,6 +27,9 @@
                     {% else %}
                     <li><a href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
                     <li><a href="{{ url_for('update_scores') }}">Update scores</a></li>
+                    {% if current_user.is_admin() %}
+                        <li><a href="{{ url_for('admin') }}">Admin</a></li>
+                    {% endif %}
                     <li><a href="{{ url_for('logout') }}">Logout</a></li>
                     {% endif %}
                 </ul>
@@ -38,6 +41,7 @@
 {% block content %}
     <head>
         <link rel="stylesheet" href={{ url_for('static', filename='style.css') }}>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     </head>
 
     <div class="container">

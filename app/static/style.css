@@ -17,6 +17,10 @@ table {
 {
     background-color: white;
     border-radius: 4em;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 /*Following is stuff to make links not highlight, to be used in the leaderboard.*/
@@ -45,4 +49,5 @@ a.nav-link:active
 body {
     background-image: url("pondertheorb.png");
     background-color: #cccccc;
+    background-size: cover;
    }

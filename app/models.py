@@ -53,6 +53,13 @@ class User(UserMixin, db.Model):
     losses = db.Column(db.Integer, default = 0)
     elo = db.Column(db.Float, default = 1000)
 
+    #checks if user has admin privileges, returns as bool
+    def is_admin(self):
+        for admin in Admin.query.all():
+            if self.id = admin.player_id:
+                return True
+        return False
+
     def fmt_name(self):
         MAX = 10
         return self.username[:MAX] + ("..."*(len(self.username) > MAX))

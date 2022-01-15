@@ -132,6 +132,16 @@ def update_scores():
     if form.validate_on_submit():
         playerwin = User.query.filter_by(username=form.winner.data).first()
         playerlose = User.query.filter_by(username=form.loser.data).first()
+        #verify that data input is valid
+        if playerwin is None and playerlose is None:
+            flash('Invalid usernames')
+            return redirect(url_for('update_scores'))
+        elif playerwin is None:
+            flash('Invalid username for winner')
+            return redirect(url_for('update_scores'))
+        elif playerlose is None:
+            flash('Invalid username for loser')
+            return redirect(url_for('update_scores'))
         #method of user class that implements the 'Elo system'
         #fun little easter egg that also prevents players reporting that they played themselves
         if playerwin.id == playerlose.id:

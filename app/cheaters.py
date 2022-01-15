@@ -12,7 +12,7 @@ def Backup_User(u, sw):
     b.losses = u.losses
     db.session.add(b)
     db.session.commit()
-
+    
 def Clear(sw):
     if sw == 'S':
         data = SunUser.query.all()
