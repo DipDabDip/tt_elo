@@ -56,7 +56,7 @@ class User(UserMixin, db.Model):
     #checks if user has admin privileges, returns as bool
     def is_admin(self):
         for admin in Admin.query.all():
-            if self.id = admin.player_id:
+            if self.id == admin.player_id:
                 return True
         return False
 
