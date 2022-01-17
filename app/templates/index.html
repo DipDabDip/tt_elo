@@ -37,10 +37,10 @@
 		{% for game in games %}
 			<tr style="border:1px solid black; border-collapse: collapse;">
 				<td style="border:1px solid black; border-collapse: collapse;"> {{ game.id }}</td>
-				<td style="border:1px solid black; border-collapse: collapse;"> {{ game.fmt_name() }}</td>
-				<td style="border:1px solid black; border-collapse: collapse;"> {{ game.fmt_lose() }}</td>
-				<td style="border:1px solid black; border-collapse: collapse;"> {{ game.fmt_rep() }}</td>
-				<td style="border:1px solid black; border-collapse: collapse;"> {{ game.timestamp }}</td>
+				<td style="border:1px solid black; border-collapse: collapse;"> {{ game.get_winner() }}</td>
+				<td style="border:1px solid black; border-collapse: collapse;"> {{ game.get_loser() }}</td>
+				<td style="border:1px solid black; border-collapse: collapse;"> {{ game.get_reporter() }}</td>
+				<td style="border:1px solid black; border-collapse: collapse;"> {{ game.get_time() }}</td>
 			</tr>
 		{% endfor %}
 	</table>

@@ -22,6 +22,18 @@ class Game(db.Model):
     reporter = db.Column(db.Integer, db.ForeignKey('user.id'))
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
+    def get_time(self):
+        return self.timestamp.strftime('%b-%d-%y - %H:%M:%S')
+
+    def get_winner(self):
+        return User.query.get(self.winner).fmt_name()
+    
+    def get_loser(self):
+        return User.query.get(self.loser).fmt_name()
+
+    def get_reporter(self):
+        return User.query.get(self.reporter).fmt_name()
+
 #database backup sunday
 class SunUser(db.Model):
     id = db.Column(db.Integer, primary_key=True)

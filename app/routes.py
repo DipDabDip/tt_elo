@@ -16,9 +16,6 @@ class game_with_player:
         self.id = game.id
         self.timestamp = game.timestamp
     #formats name nicely for output
-    def fmt_name(self):
-        MAX = 10
-        return self.winner[:MAX] + ("..."*(len(self.winner) > MAX))
     def fmt_lose(self):
         MAX = 10
         return self.loser[:MAX] + ("..."*(len(self.loser) > MAX))
@@ -36,7 +33,6 @@ def index():
     players.sort(key=lambda x: x.elo, reverse=True)
     #generate a chronological list of games for game log
     games = Game.query.all()
-    games = [game_with_player(x) for x in games]
     games.reverse()
     #generate webpage with jinja
     return render_template('index.html', title='Home', players=players, games=games)

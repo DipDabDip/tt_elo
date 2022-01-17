@@ -5,3 +5,4 @@ app.db
 __pycache__
 migrations/versions/4372d227108d_help.py
 .gitignore
+.vscode/settings.json
