@@ -65,6 +65,10 @@ class User(UserMixin, db.Model):
     losses = db.Column(db.Integer, default = 0)
     elo = db.Column(db.Float, default = 1000)
 
+    #formatting last seen date
+    def get_last_seen(self):
+        return self.last_seen.strftime('%b-%d-%y - %H:%M:%S')
+
     #checks if user has admin privileges, returns as bool
     def is_admin(self):
         for admin in Admin.query.all():
@@ -86,7 +90,7 @@ class User(UserMixin, db.Model):
 
     #for use in terminal when editing database
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+        return "User id: " + str(self.id) + " Username: " + str(self.username)
 
 
     #generates link for gravatar, see more here: https://en.gravatar.com/

@@ -61,6 +61,9 @@ def login():
     #render page with jinja template
     return render_template('login.html', title='Sign In', form=form)
 
+@app.route('/admin', methods=['GET'])
+def admin():
+    return render_template('admin.html')
 
 #simple logout button, doesn't render a page
 @app.route('/logout')

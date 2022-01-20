@@ -1,5 +1,5 @@
 /*Following is css for tables, which im only using to display leaderboards & such*/
-table {
+table.home-page {
     float:left;
     border-collapse: collapse;
     border: 1px solid black;
@@ -11,6 +11,18 @@ table {
     width: fit-content;
     background-color: #ffffff;
 }
+
+/*fixing up my inline css so mlugg doesnt hurt me*/
+tr
+{
+   border:1px solid black;
+   border-collapse: collapse;
+}
+td{
+   border:1px solid black;
+   border-collapse: collapse;
+}
+
 
 /*Setting a background for the header */
 .white_bg
@@ -45,9 +57,18 @@ a.nav-link:active
    text-decoration: none;
 }
 
+/* an orb worth pondering */
 /* setting a funky fresh backround image */
 body {
     background-image: url("pondertheorb.png");
     background-color: #cccccc;
     background-size: cover;
    }
+
+.middle {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   text-align: center;
+ }
