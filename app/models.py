@@ -65,6 +65,9 @@ class User(UserMixin, db.Model):
     losses = db.Column(db.Integer, default = 0)
     elo = db.Column(db.Float, default = 1000)
 
+    def winperc(self):
+        return str(round(100*self.wins/self.getwins(), 0)) + "%"
+
     #formatting last seen date
     def get_last_seen(self):
         return self.last_seen.strftime('%b-%d-%y - %H:%M:%S')

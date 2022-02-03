@@ -11,7 +11,8 @@
 				<th> Username </th>
 				<th> Elo </th>
 				<th> Wins </th>
-				<th> Losses </th>			
+				<th> Losses </th>
+				<th> Win%</th>	
 			</tr>
 			{% for player in players %}
 			{% if player.getwins() %}
@@ -20,7 +21,7 @@
 					<td> {{ player.getelo() }}</td>
 					<td> {{ player.wins }}</td>
 					<td> {{ player.losses }}</td>
-				
+					<td> {{ player.winperc() }} </td>
 				</tr>
 			{% endif %}
 			{% endfor %}

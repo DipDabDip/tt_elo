@@ -2,26 +2,10 @@ from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, UpdateScoreForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Game
+from app.models import User, Game, Admin
 from werkzeug.urls import url_parse
 from datetime import datetime
-
-#class to help the formatting of the game table on the home page
-#Note to self - i could totally package this into the game class as something like game.getwinner() querying the database so then i could have game.getwinner().fmtname()
-class game_with_player:
-    def __init__(self, game):
-        self.winner = User.query.get(game.winner).username
-        self.loser = User.query.get(game.loser).username
-        self.reporter = User.query.get(game.reporter).username
-        self.id = game.id
-        self.timestamp = game.timestamp
-    #formats name nicely for output
-    def fmt_lose(self):
-        MAX = 10
-        return self.loser[:MAX] + ("..."*(len(self.loser) > MAX))
-    def fmt_rep(self):
-        MAX = 10
-        return self.reporter[:MAX] + ("..."*(len(self.reporter) > MAX))        
+import re
 
 
 #function to generate home page
@@ -61,9 +45,16 @@ def login():
     #render page with jinja template
     return render_template('login.html', title='Sign In', form=form)
 
+
+#admin page
 @app.route('/admin', methods=['GET'])
+@login_required
 def admin():
-    return render_template('admin.html')
+    for admin in Admin.query.all():
+        if admin.player_id == current_user.id:
+            return render_template('admin.html')
+    flash('You are not an admin')
+    return redirect(url_for('index'))
 
 #simple logout button, doesn't render a page
 @app.route('/logout')
@@ -81,16 +72,21 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         #create User object from app.models
-        user = User(username=form.username.data, email=form.email.data)
-        user.set_password(form.password.data)
-        #add to db and save
-        db.session.add(user)
-        db.session.commit()
-        flash('Congratulations, you are now a registered user!')
-        return redirect(url_for('login'))
+        #verify username input is sensible with regex
+        if re.match(r'^[A-Za-z0-9_]+$', form.username.data):
+            user = User(username=form.username.data, email=form.email.data)
+            user.set_password(form.password.data)
+            #add to db and save
+            db.session.add(user)
+            db.session.commit()
+            flash('Congratulations, you are now a registered user!')
+            return redirect(url_for('login'))
+        else:
+            flash('Only letters, numbers, and underscores in username.')
+            return redirect(url_for('register'))
     #render page
     return render_template('register.html', title='Register', form=form)
-
+    
 #user profile page
 @app.route('/user/<username>')
 @login_required
@@ -107,11 +103,14 @@ def edit_profile():
     #load web form from app.forms
     form = EditProfileForm(current_user.username)
     if form.validate_on_submit():
-        current_user.username = form.username.data
-        current_user.about_me = form.about_me.data
-        #push changes to db
-        db.session.commit()
-        flash('Your changes have been saved.')
+        if re.match(r'^[A-Za-z0-9_]+$', text):
+            current_user.username = form.username.data
+            current_user.about_me = form.about_me.data
+            #push changes to db
+            db.session.commit()
+            flash('Your changes have been saved.')
+        else:
+            flash('Only letters, numbers, and underscores in username.')
         return redirect(url_for('edit_profile'))
     elif request.method == 'GET':
         #loads the form with current data already loaded into the boxes
