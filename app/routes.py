@@ -86,7 +86,7 @@ def register():
             return redirect(url_for('register'))
     #render page
     return render_template('register.html', title='Register', form=form)
-    
+
 #user profile page
 @app.route('/user/<username>')
 @login_required
@@ -103,7 +103,7 @@ def edit_profile():
     #load web form from app.forms
     form = EditProfileForm(current_user.username)
     if form.validate_on_submit():
-        if re.match(r'^[A-Za-z0-9_]+$', text):
+        if re.match(r'^[A-Za-z0-9_]+$', form.username.data):
             current_user.username = form.username.data
             current_user.about_me = form.about_me.data
             #push changes to db
