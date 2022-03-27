@@ -9,7 +9,7 @@ from app.stats import chart
 import re
 
 
-#function that reloads all games
+#function that reloads all games - doesnt return a web page
 @app.route('/reload_games')
 def load_games():
     #resets the users elo, wins, and losses
@@ -21,20 +21,20 @@ def load_games():
     g = Game.query.all()
     for game in g:
         winner = User.query.get(game.winner)
-        if winner is None:
+        if winner is None: #if the winner can't be found it must be a deleted user
             winner = Del_User.query.filter_by(user_id=game.winner).first()
         loser = User.query.get(game.loser)
-        if loser is None:
+        if loser is None:#if the loser can't be found it must be a deleted user
             loser = Del_User.query.filter_by(user_id=game.loser).first()
         winner.beat(loser)
-    db.session.commit()
+    db.session.commit()#saves changes to db
     #instead of returning a web page - redirects to the admin page
     return redirect(url_for('admin'))
     
 
 #function to generate home page
 @app.route('/')
-@app.route('/index', methods=['GET'])
+@app.route('/index', methods=['GET'])#sets the path to this page, and defines valid methods for this page
 def index():
     #generate and sort a list of players by elo for leaderboard 
     players = User.query.all()
@@ -47,7 +47,7 @@ def index():
 
 
 #function to generate login page
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])#sets the path to this page, and defines valid methods for this page
 def login():
     #redirect user if already logged in
     if current_user.is_authenticated:
@@ -71,7 +71,7 @@ def login():
 
 
 #admin page
-@app.route('/admin', methods=['GET', 'POST'])
+@app.route('/admin', methods=['GET', 'POST'])#sets the path to this page, and defines valid methods for this page
 @login_required
 def admin():
     #verify user is in Admin table
@@ -103,7 +103,7 @@ def logout():
     return redirect(url_for('index'))
 
 #register user page
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])#sets the path to this page, and defines valid methods for this page
 def register():
     #redirect if user already logged in
     if current_user.is_authenticated:
@@ -128,29 +128,29 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 #user profile page
-@app.route('/user/<username>')
+@app.route('/user/<username>')#sets the path to this page
 @login_required
 def user(username):
-    user = User.query.filter_by(username=username).first_or_404()
+    user = User.query.filter_by(username=username).first_or_404()#if user cannot be found redirects to 404 error page
     #render page
     return render_template('user.html', user=user)
 
 
 #edit profile page
-@app.route('/edit_profile', methods=['GET', 'POST'])
+@app.route('/edit_profile', methods=['GET', 'POST'])#sets the path to this page, and defines valid methods for this page
 @login_required
 def edit_profile():
     #load web form from app.forms
-    form = EditProfileForm(current_user.username)
+    form = EditProfileForm(current_user.username)#loads web form
     if form.validate_on_submit():
-        if re.match(r'^[A-Za-z0-9_]+$', form.username.data):
+        if re.match(r'^[A-Za-z0-9_]+$', form.username.data):#only allows users to input sensible username data
             current_user.username = form.username.data
             current_user.about_me = form.about_me.data
             #push changes to db
             db.session.commit()
             flash('Your changes have been saved.')
         else:
-            flash('Only letters, numbers, and underscores in username.')
+            flash('Only letters, numbers, and underscores in username.')#prevents users having usernames with unsensible characters
         return redirect(url_for('edit_profile'))
     elif request.method == 'GET':
         #loads the form with current data already loaded into the boxes
@@ -162,7 +162,7 @@ def edit_profile():
 
 
 #page to update scores
-@app.route('/update_scores', methods=['GET', 'POST'])
+@app.route('/update_scores', methods=['GET', 'POST'])#sets the path to this page, and defines valid methods for this page
 @login_required
 def update_scores():
     #load form from app.forms

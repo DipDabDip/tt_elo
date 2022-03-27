@@ -1,7 +1,7 @@
 from flask import render_template
 from app import app, db
 
-#same as routes, but returns error changes
+#same as routes, but returns error pages
 
 @app.errorhandler(404)
 def not_found_error(error):
