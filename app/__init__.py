@@ -7,6 +7,7 @@ from flask_bootstrap import Bootstrap
 import logging
 from logging.handlers import RotatingFileHandler, SMTPHandler
 import os
+from flask_googlecharts import GoogleCharts
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -15,6 +16,7 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
 bootstrap = Bootstrap(app)
+charts = GoogleCharts(app)
 
 from app import routes, models, errors
 

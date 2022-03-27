@@ -6,6 +6,15 @@ from flask_login import current_user
 
 #every class in app.forms is used to create web forms on different pages
 
+#test form, if still here delete
+class TestForm(FlaskForm):
+    username2 = StringField('Username', validators=[DataRequired()])
+    submit2 = SubmitField('Submit')
+
+class DeleteUserForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    submit = SubmitField('Delete User')
+
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])

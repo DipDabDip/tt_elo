@@ -1,10 +1,28 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-<div class="middle">
-    <div>
-        <h1 class="white_bg">COMING SOON</h1>
-    </div>
-    <hr>
-</div>
+    <h1>Admin</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}<br>
+            {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+			{% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    <form action="" method="post">
+        {{ form_a.hidden_tag() }}
+        <p>
+            {{ form_a.username2.label }}<br>
+            {{ form_a.username2(size=32) }}<br>
+            {% for error in form_a.username2.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+			{% endfor %}
+        </p>
+        <p>{{ form_a.submit2() }}</p>
+    </form>
+        <a class="white_bg" href="{{ url_for('load_games') }}">Reload games</a>
 {% endblock %}

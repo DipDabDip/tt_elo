@@ -1,16 +1,40 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, UpdateScoreForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, UpdateScoreForm, DeleteUserForm, TestForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Game, Admin
+from app.models import User, Game, Admin, Del_User
 from werkzeug.urls import url_parse
 from datetime import datetime
+from app.stats import chart
 import re
 
 
+#function that reloads all games
+@app.route('/reload_games')
+def load_games():
+    #resets the users elo, wins, and losses
+    u = User.query.all() + Del_User.query.all()
+    for user in u:
+        user.elo = 1000
+        user.wins = user.losses = 0        
+    #iterates through the game log, replays all the games.
+    g = Game.query.all()
+    for game in g:
+        winner = User.query.get(game.winner)
+        if winner is None:
+            winner = Del_User.query.filter_by(user_id=game.winner).first()
+        loser = User.query.get(game.loser)
+        if loser is None:
+            loser = Del_User.query.filter_by(user_id=game.loser).first()
+        winner.beat(loser)
+    db.session.commit()
+    #instead of returning a web page - redirects to the admin page
+    return redirect(url_for('admin'))
+    
+
 #function to generate home page
 @app.route('/')
-@app.route('/index')
+@app.route('/index', methods=['GET'])
 def index():
     #generate and sort a list of players by elo for leaderboard 
     players = User.query.all()
@@ -47,12 +71,28 @@ def login():
 
 
 #admin page
-@app.route('/admin', methods=['GET'])
+@app.route('/admin', methods=['GET', 'POST'])
 @login_required
 def admin():
+    #verify user is in Admin table
     for admin in Admin.query.all():
         if admin.player_id == current_user.id:
-            return render_template('admin.html')
+            form = DeleteUserForm()
+            form_a = TestForm()
+            if form.validate_on_submit():
+                #attempt to delete user
+                user_to_delete = User.query.filter_by(username=form.username.data).first()
+                if user_to_delete is not None:
+                    #delete user
+                    user_to_delete.del_user()
+                    flash("User deleted")
+                else:
+                    #return error message
+                    flash("User not found.")
+            if form_a.validate_on_submit():
+                #if the other form has stuff - not sure if it will work if user fills out both forms and then hits submit on 1?
+                print(form.username2.data)
+            return render_template('admin.html', title='Admin', form=form, form_a=form_a)
     flash('You are not an admin')
     return redirect(url_for('index'))
 
